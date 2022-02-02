@@ -100,7 +100,40 @@ function turnHoursToMinutes(filmArray) {
 }
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg() {}
+function bestYearAvg(filmArray) {
+  if (filmArray.length === 0) return null;
+  const yearArray = [];
+  for (let film of filmArray) {
+    if (yearArray.includes(film.year)) {
+      continue;
+    } else {
+      yearArray.push(film.year);
+    }
+  }
+  const yearsWithAvgScores = [];
+  yearArray.forEach((y) => {
+    const arr = filmArray.filter((film) => film.year === y);
+    let average =
+      arr.reduce((accumulator, film) => {
+        return accumulator + film.score;
+      }, 0) / arr.length;
+    yearsWithAvgScores.push({ year: y, averageScore: average });
+  });
+  const sortYearsWithAvgScores = yearsWithAvgScores.sort((a, b) => {
+    if (a.averageScore > b.averageScore) {
+      return -1;
+    } else if (a.averageScore < b.averageScore) {
+      return 1;
+    } else if (a.averageScore === b.averageScore) {
+      if (a.year < b.year) {
+        return -1;
+      } else if (a.year > b.year) {
+        return 1;
+      }
+    }
+  });
+  return `The best year was ${sortYearsWithAvgScores[0].year} with an average score of ${sortYearsWithAvgScores[0].averageScore}`;
+}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
