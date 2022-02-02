@@ -5,7 +5,8 @@ function getAllDirectors(filmArray) {
   let directorArray = filmArray.map((film) => film.director);
   let cleanDirectorArray = [];
   for (let director of directorArray) {
-    if (!cleanDirectorArray.includes(director)) cleanDirectorArray.push(director);
+    if (!cleanDirectorArray.includes(director))
+      cleanDirectorArray.push(director);
   }
   return cleanDirectorArray;
 }
@@ -78,7 +79,25 @@ function orderAlphabetically(filmArray) {
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes() {}
+function turnHoursToMinutes(filmArray) {
+  let filmArrayWithMin = filmArray.map((film) => {
+    let newFilm = { ...film };
+    let timeInMin = 0;
+    const arrayTime = film.duration.split(' ');
+    if (arrayTime.length === 2) {
+      timeInMin =
+        Number(arrayTime[1].replace('min', '')) +
+        Number(arrayTime[0].replace('h', '')) * 60;
+    } else if (arrayTime[0][arrayTime[0].length - 1] === 'h') {
+      timeInMin = Number(arrayTime[0].replace('h', '') * 60);
+    } else {
+      timeInMin = Number(arrayTime[0].replace('min', ''));
+    }
+    newFilm.duration = timeInMin;
+    return newFilm;
+  });
+  return filmArrayWithMin;
+}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg() {}
