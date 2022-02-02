@@ -2,7 +2,12 @@
 // _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
 // How could you "clean" a bit this array and make it unified (without duplicates)?
 function getAllDirectors(filmArray) {
-  return filmArray.map((film) => film.director);
+  let directorArray = filmArray.map((film) => film.director);
+  let cleanDirectorArray = [];
+  for (let director of directorArray) {
+    if (!cleanDirectorArray.includes(director)) cleanDirectorArray.push(director);
+  }
+  return cleanDirectorArray;
 }
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
@@ -69,7 +74,7 @@ function orderAlphabetically(filmArray) {
   });
   let first20FilmOrdered = filmOrdered.map((film) => film.title);
   first20FilmOrdered = first20FilmOrdered.filter((film, index) => index < 20);
-  return [...first20FilmOrdered];
+  return first20FilmOrdered;
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
